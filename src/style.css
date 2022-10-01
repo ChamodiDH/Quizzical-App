@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding-top: 50px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -57,4 +58,114 @@ code {
   color: aliceblue;
   border: none;
   margin-top: 20px;
+}
+
+.answer-box{
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom: 15px;
+ 
+}
+
+.answer{
+  margin: 0;
+  padding: 5px 20px;
+border: 2px solid  #293264;;
+border-radius: 7.94239px;
+margin-right: 20px;
+font-family: 'Karla';
+font-style: normal;
+font-weight: 700;
+font-size: 14.24px;
+line-height: 12px;
+text-align: center;
+
+color: #293264
+}
+
+.question{
+  font-family: 'Karla';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #293264
+}
+
+.q-container{
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-check-answer{
+background: #4D5B9E;
+border-radius: 10px;
+width: 150px;
+display: block;
+height: 35px;
+text-align: center;
+color: #F5F7FB;
+padding: 5px 10px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 30px;
+margin-bottom: 20px;
+border:none;
+font-family: 'Karla';
+font-style: normal;
+font-weight: 400;
+font-size: 14.24px;
+line-height: 12px;
+text-align: center;
+
+color: #F5F7FB;
+
+}
+
+.ftr-score-container{
+  display: flex;
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.score{
+font-family: 'Karla';
+font-style: normal;
+font-weight: 700;
+font-size: 18.8px;
+line-height: 15px;
+text-align: center;
+padding:5px 30px;
+color: #293264;
+
+}
+
+.btn-play-again{
+  background: #4D5B9E;
+  border-radius: 10px;
+  width: 150px;
+  display: block;
+  height: 35px;
+  text-align: center;
+  color: #F5F7FB;
+  padding: 5px 10px;
+ margin-left: 20px;
+  border:none;
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14.24px;
+  line-height: 12px;
+  text-align: center;
+  
+  color: #F5F7FB;
+
 }
