@@ -10,6 +10,7 @@ export default function Question(props){
     const correct_answer_array = []
     correct_answer_array.push(correct_answer)
     const incorrect_answers = props.incorrect_answers
+    const isSelect = props.isSelected
 
     //generate a random number
     const rindex =  Math.floor((Math.random() * 4));
@@ -21,9 +22,15 @@ export default function Question(props){
     const allanswers = full_answers.map(
         answer => {
             return(
-                <h6 className="answer"
+                <h6 className={props.isSelected ? "answer-select": "answer"}
                 key={nanoid()}
-                >{he.decode(answer)}</h6>
+                onClick={props.handleSelectF}
+                
+                >
+                    {props.id}
+                
+                
+                </h6>
             )
         }
     )

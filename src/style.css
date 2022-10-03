@@ -83,6 +83,25 @@ text-align: center;
 color: #293264
 }
 
+
+.answer-select{
+  margin: 0;
+  padding: 5px 20px;
+border: 2px solid  #293264;;
+border-radius: 7.94239px;
+margin-right: 20px;
+font-family: 'Karla';
+font-style: normal;
+font-weight: 700;
+font-size: 14.24px;
+line-height: 12px;
+text-align: center;
+background: #D6DBF5;
+
+color: #293264
+}
+
+
 .question{
   font-family: 'Karla';
 font-style: normal;
