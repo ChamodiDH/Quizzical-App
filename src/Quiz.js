@@ -14,24 +14,13 @@ export default function Quiz() {
         fetch("https://opentdb.com/api.php?amount=05")
             .then(res => res.json())
             .then(data => setAllQuestions(data.results.map(die => {
-                       return{ ...die, isconf:"screw ya", id:nanoid(),selectedAnswer: "",
-                       isSelect: false, }
+                       return{ ...die, isconf:"screw ya", id:nanoid(),
+                       isSelect: false, selectedAnswer: "",}
                           
                       })))
     }, [])
 
-    const [questionOb, setQuestion] = React.useState({
-        category: "",
-        type: "",
-        difficulty: "",
-        question: "",
-        correct_answer: "",
-        incorrect_answers: "",
-        selectedAnswer: "",
-        isSelect: false,
-
-    })
-
+    
 
     // const [allMemes, setAllMemes] = React.useState([])
 
@@ -81,15 +70,19 @@ export default function Quiz() {
 
     // console.log("all questions:"+ allQuestions)
 
-    function handleSelect(id) {
+    const handleSelect = (id,answer) => {
 
         setAllQuestions(oldQuestions => oldQuestions.map(questionp => {
+            
             return questionp.id === id ?
-                { ...questionp, isSelect: !questionp.isSelect } :
+                {
+                     ...questionp, 
+                     selectedAnswer: answer } :
                 questionp
+                
         }))
-
-        console.log()
+       
+       
     }
 
     const questionElements = allQuestions.map(item => {
@@ -104,8 +97,9 @@ export default function Quiz() {
                 incorrect_answers={item.incorrect_answers}
                 isSelected={item.isSelect}
                 id={item.id}
-                handleSelectF={() => handleSelect(item.id)}
+                handleSelectF={handleSelect}
                 conf={item.isconf}
+                selectedAnswer = {item.selectedAnswer}
 
             />)
     })
