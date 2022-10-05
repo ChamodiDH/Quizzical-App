@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 
 export default function Quiz() {
 
-    const ischeck = false
+    const [ischeck, setIsCheck] = React.useState(false)
 
     //initialize a state for all questions
     const [allQuestions, setAllQuestions] = React.useState([])
@@ -14,8 +14,7 @@ export default function Quiz() {
         fetch("https://opentdb.com/api.php?amount=05")
             .then(res => res.json())
             .then(data => setAllQuestions(data.results.map(die => {
-                       return{ ...die, isconf:"screw ya", id:nanoid(),
-                       isSelect: false, selectedAnswer: "",}
+                       return{ ...die,id:nanoid(), selectedAnswer: ""}
                           
                       })))
     }, [])
@@ -85,6 +84,10 @@ export default function Quiz() {
        
     }
 
+    const handleCheck = () => {
+        setIsCheck(true)
+    }
+
     const questionElements = allQuestions.map(item => {
 
 
@@ -98,8 +101,8 @@ export default function Quiz() {
                 isSelected={item.isSelect}
                 id={item.id}
                 handleSelectF={handleSelect}
-                conf={item.isconf}
                 selectedAnswer = {item.selectedAnswer}
+                ischeck={ischeck}
 
             />)
     })
@@ -113,12 +116,12 @@ export default function Quiz() {
             {questionElements}
             {!ischeck ?
                 <footer>
-                    <button className="btn-check-answer">Check answers</button>
+                    <button className="btn-check-answer" onClick={handleCheck}>Check answers</button>
                 </footer>
                 : <footer>
                     <div className="ftr-score-container">
                         <h5 className="score">You scored 3/5 correct answers</h5>
-                        <button className="btn-play-again">Play Again</button>
+                        <button className="btn-play-again" >Play Again</button>
                     </div>
                 </footer>
             }
