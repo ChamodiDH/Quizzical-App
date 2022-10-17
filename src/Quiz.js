@@ -5,9 +5,14 @@ import { nanoid } from 'nanoid'
 export default function Quiz() {
 
     const [ischeck, setIsCheck] = React.useState(false)
+    const [total, setTotal] = React.useState(0)
+
+    
 
     //initialize a state for all questions
     const [allQuestions, setAllQuestions] = React.useState([])
+    const allAnswered = allQuestions.every(question => question.selectedAnswer !== "")
+    
 
     //get data from the API
     React.useEffect(() => {
@@ -19,6 +24,7 @@ export default function Quiz() {
                       })))
     }, [])
 
+    
     
 
     // const [allMemes, setAllMemes] = React.useState([])
@@ -70,7 +76,7 @@ export default function Quiz() {
     // console.log("all questions:"+ allQuestions)
 
     const handleSelect = (id,answer) => {
-
+    
         setAllQuestions(oldQuestions => oldQuestions.map(questionp => {
             
             return questionp.id === id ?
@@ -84,10 +90,31 @@ export default function Quiz() {
        
     }
 
+    React.useEffect(() =>{
+
+        let count = 0
+
+        if(allAnswered){
+            allQuestions.forEach(question => {
+                if(question.selectedAnswer === question.correct_answer){
+                    count++
+                }
+            }
+              
+            )
+
+            setTotal(count)
+
+        }
+
+    },[allQuestions])
+
     const handleCheck = () => {
         setIsCheck(true)
+       
     }
 
+    
     const questionElements = allQuestions.map(item => {
 
 
@@ -103,6 +130,7 @@ export default function Quiz() {
                 handleSelectF={handleSelect}
                 selectedAnswer = {item.selectedAnswer}
                 ischeck={ischeck}
+               
 
             />)
     })
@@ -120,7 +148,7 @@ export default function Quiz() {
                 </footer>
                 : <footer>
                     <div className="ftr-score-container">
-                        <h5 className="score">You scored 3/5 correct answers</h5>
+                        <h5 className="score">You scored {total}/5 correct answers</h5>
                         <button className="btn-play-again" >Play Again</button>
                     </div>
                 </footer>

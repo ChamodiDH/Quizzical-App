@@ -11,6 +11,7 @@ export default function Question(props){
     correct_answer_array.push(correct_answer)
     const incorrect_answers = props.incorrect_answers
     const ischeck = props.ischeck
+    let count = 0
    
    
     
@@ -32,6 +33,7 @@ export default function Question(props){
             
         }else{
             if((s_answer === props.correct_answer) && (s_answer === answer)){
+                count++
                 return "answer-correct"
             }else if((s_answer !== props.correct_answer) && (s_answer === answer)){
                     return "answer-wrong"
@@ -41,6 +43,8 @@ export default function Question(props){
                 return "answer"
             }
         }
+
+        
     }
     
     const allanswers = full_answers.map(
@@ -72,5 +76,6 @@ export default function Question(props){
             </div>
             <hr/>
         </div>
+        
     )
 }
