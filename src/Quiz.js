@@ -6,6 +6,7 @@ export default function Quiz() {
 
     const [ischeck, setIsCheck] = React.useState(false)
     const [total, setTotal] = React.useState(0)
+    const [isplay,setPlay] = React.useState(1)
 
     
 
@@ -22,7 +23,7 @@ export default function Quiz() {
                        return{ ...die,id:nanoid(), selectedAnswer: ""}
                           
                       })))
-    }, [])
+    }, [isplay])
 
     
     
@@ -112,6 +113,13 @@ export default function Quiz() {
     const handleCheck = () => {
         setIsCheck(true)
        
+       
+    }
+
+    const handleNew = () =>{
+            setPlay(prev => prev+1)
+            setIsCheck(prev => !prev)
+            setTotal(0)
     }
 
     
@@ -149,7 +157,7 @@ export default function Quiz() {
                 : <footer>
                     <div className="ftr-score-container">
                         <h5 className="score">You scored {total}/5 correct answers</h5>
-                        <button className="btn-play-again" >Play Again</button>
+                        <button className="btn-play-again" onClick = {handleNew}  >Play Again</button>
                     </div>
                 </footer>
             }
