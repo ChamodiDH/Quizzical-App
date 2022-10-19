@@ -6,27 +6,27 @@ export default function Quiz() {
 
     const [ischeck, setIsCheck] = React.useState(false)
     const [total, setTotal] = React.useState(0)
-    const [isplay,setPlay] = React.useState(1)
+    const [isplay, setPlay] = React.useState(1)
 
-    
+
 
     //initialize a state for all questions
     const [allQuestions, setAllQuestions] = React.useState([])
     const allAnswered = allQuestions.every(question => question.selectedAnswer !== "")
-    
+
 
     //get data from the API
     React.useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=05")
             .then(res => res.json())
             .then(data => setAllQuestions(data.results.map(die => {
-                       return{ ...die,id:nanoid(), selectedAnswer: ""}
-                          
-                      })))
+                return { ...die, id: nanoid(), selectedAnswer: "" }
+
+            })))
     }, [isplay])
 
-    
-    
+
+
 
     // const [allMemes, setAllMemes] = React.useState([])
 
@@ -53,7 +53,7 @@ export default function Quiz() {
     //     }
     // })
 
-    
+
 
     // setNumbers(oldDice => oldDice.map(die => {
     //     return die.id === id ?
@@ -66,7 +66,7 @@ export default function Quiz() {
 
     //     setAllQuestions(oldDice => oldDice.map(die => {
     //         return{ ...die, isconf:"screw ya" }
-              
+
     //       }))
 
     //     console.log("nano id :" + nanoid())
@@ -76,53 +76,54 @@ export default function Quiz() {
 
     // console.log("all questions:"+ allQuestions)
 
-    const handleSelect = (id,answer) => {
-    
+    const handleSelect = (id, answer) => {
+
         setAllQuestions(oldQuestions => oldQuestions.map(questionp => {
-            
+
             return questionp.id === id ?
                 {
-                     ...questionp, 
-                     selectedAnswer: answer } :
+                    ...questionp,
+                    selectedAnswer: answer
+                } :
                 questionp
-                
+
         }))
-       
-       
+
+
     }
 
-    React.useEffect(() =>{
+    React.useEffect(() => {
 
         let count = 0
 
-        if(allAnswered){
+        if (allAnswered) {
             allQuestions.forEach(question => {
-                if(question.selectedAnswer === question.correct_answer){
+                if (question.selectedAnswer === question.correct_answer) {
                     count++
                 }
             }
-              
+
             )
 
             setTotal(count)
 
         }
 
-    },[allQuestions])
+    }, [allQuestions])
 
     const handleCheck = () => {
         setIsCheck(true)
-       
-       
+
+
     }
 
-    const handleNew = () =>{
-            setPlay(prev => prev+1)
-            setIsCheck(prev => !prev)
-            setTotal(0)
+    const handleNew = () => {
+        setPlay(prev => prev + 1)
+        setIsCheck(prev => !prev)
+        setTotal(0)
     }
 
-    
+
     const questionElements = allQuestions.map(item => {
 
 
@@ -136,14 +137,20 @@ export default function Quiz() {
                 isSelected={item.isSelect}
                 id={item.id}
                 handleSelectF={handleSelect}
-                selectedAnswer = {item.selectedAnswer}
+                selectedAnswer={item.selectedAnswer}
                 ischeck={ischeck}
-               
+
 
             />)
     })
 
-
+    // function checkBtnClass() {
+    //     if (allAnswered) {
+    //         return "btn-check-answer"
+    //     } else {
+    //         return "btn-check-answer"
+    //     }
+    // }
 
 
 
@@ -152,12 +159,12 @@ export default function Quiz() {
             {questionElements}
             {!ischeck ?
                 <footer>
-                    <button className="btn-check-answer" onClick={handleCheck}>Check answers</button>
+                    <button className={allAnswered ? "btn-check-answer" : "btn-disable-answer"} onClick={handleCheck} disabled={!allAnswered}>Check answers</button>
                 </footer>
                 : <footer>
                     <div className="ftr-score-container">
                         <h5 className="score">You scored {total}/5 correct answers</h5>
-                        <button className="btn-play-again" onClick = {handleNew}  >Play Again</button>
+                        <button className="btn-play-again" onClick={handleNew}  >Play Again</button>
                     </div>
                 </footer>
             }
