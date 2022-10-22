@@ -7,22 +7,42 @@ export default function Question(props){
 
     const questionc = props.question
     const correct_answer = props.correct_answer
-    const correct_answer_array = []
-    correct_answer_array.push(correct_answer)
-    const incorrect_answers = props.incorrect_answers
+    //const correct_answer_array = []
+    //correct_answer_array.push(correct_answer)
+    let incorrect_answers = props.incorrect_answers
     const ischeck = props.ischeck
     let count = 0
+    const [full_answers, setFullAnswers] = React.useState([])
    
    
     
 
     //generate a random number
-    const rindex =  Math.floor((Math.random() * 4));
+   
 
-   const full_answers = incorrect_answers.concat(correct_answer_array)
+   //const full_answers = incorrect_answers.concat(correct_answer_array)
    //const full_answers = incorrect_answers.splice(rindex,0,correct_answer)
     //incorrect_answers.push(correct_answer)
 
+    // const rindex =  Math.floor((Math.random() * 4))
+    // incorrect_answers.splice(rindex,0,"sunday")
+
+    // let full_answers = [...incorrect_answers]
+   
+    // React.useState(() => {
+
+    // const rindex =  Math.floor((Math.random() * 4))
+    // incorrect_answers.splice(rindex,0,"sunday")
+
+    // //incorrect_answers = [... incorrect_answers].splice(rindex,0,'hello')
+    // setFullAnswers([...incorrect_answers])
+
+    // console.log("here:"+ full_answers)
+   
+
+
+    // },[ full_answers]) 
+   
     function answerClass(s_answer, answer){
         if(!ischeck){
             if(s_answer === answer){
@@ -47,7 +67,7 @@ export default function Question(props){
         
     }
     
-    const allanswers = full_answers.map(
+    const allanswers =   incorrect_answers.map(
         answer => {
 
            

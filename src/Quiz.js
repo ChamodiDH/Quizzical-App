@@ -127,13 +127,17 @@ export default function Quiz() {
     const questionElements = allQuestions.map(item => {
 
 
+        let allAnswersArr = [...item.incorrect_answers];
+        const randomNum = Math.floor(Math.random() * 4);
+        allAnswersArr.splice(randomNum, 0, item.correct_answer);
+
 
         return (
             <Question
                 key={nanoid()}
                 question={item.question}
                 correct_answer={item.correct_answer}
-                incorrect_answers={item.incorrect_answers}
+                incorrect_answers={allAnswersArr}
                 isSelected={item.isSelect}
                 id={item.id}
                 handleSelectF={handleSelect}
