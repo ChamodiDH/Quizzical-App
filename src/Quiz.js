@@ -17,15 +17,18 @@ export default function Quiz() {
 
     //get data from the API
     React.useEffect(() => {
+
         fetch("https://opentdb.com/api.php?amount=05")
             .then(res => res.json())
             .then(data => setAllQuestions(data.results.map(die => {
-                return { ...die, id: nanoid(), selectedAnswer: "" }
+                let rn = Math.floor(Math.random() * 4)
+                return { ...die, id: nanoid(), selectedAnswer: "", rnum:rn}
 
             })))
     }, [isplay])
 
 
+    console.log("hi")
 
 
     // const [allMemes, setAllMemes] = React.useState([])
@@ -79,11 +82,12 @@ export default function Quiz() {
     const handleSelect = (id, answer) => {
 
         setAllQuestions(oldQuestions => oldQuestions.map(questionp => {
-
+            console.log(id)
             return questionp.id === id ?
                 {
                     ...questionp,
                     selectedAnswer: answer
+                    
                 } :
                 questionp
 
@@ -129,8 +133,8 @@ export default function Quiz() {
 
         let allAnswersArr = [...item.incorrect_answers];
         const randomNum = Math.floor(Math.random() * 4);
-        allAnswersArr.splice(randomNum, 0, item.correct_answer);
-
+        allAnswersArr.splice(item.rnum, 0, item.correct_answer);
+        
 
         return (
             <Question
@@ -146,6 +150,8 @@ export default function Quiz() {
 
 
             />)
+
+            
     })
 
     // function checkBtnClass() {
